@@ -1,0 +1,15 @@
+# OSX
+.DS_Store
+
+# intelliJ User-specific stuff
+.idea
+.idea/*.xml
+**.iml
+out/
+
+# eclipse
+.classpath
+.project
+
+# compiled binary
+bin/
