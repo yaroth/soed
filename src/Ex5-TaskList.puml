@@ -1,0 +1,30 @@
+@startuml
+
+abstract class AbstractList
+abstract AbstractCollection
+interface List
+interface Collection
+
+List <|-- AbstractList
+Collection <|-- AbstractCollection
+
+Collection <|- List
+AbstractCollection <|- AbstractList
+AbstractList <|-- ArrayList
+Vehicle <|-- Car
+Vehicle <|-- Truck
+
+class ArrayList {
+Object[] elementData
+size()
+}
+
+enum TimeUnit {
+MONTHS
+WEEKS
+DAYS
+HOURS
+MINUTES
+}
+
+@enduml
