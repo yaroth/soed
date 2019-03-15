@@ -13,3 +13,6 @@ out/
 
 # compiled binary
 bin/
+
+# text file output
+TaskList
