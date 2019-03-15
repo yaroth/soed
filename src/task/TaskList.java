@@ -32,7 +32,7 @@ public class TaskList {
             Interval interval = rep.getInterval();
             for (int i = 0; i < rep.getQuantity(); i++) {
                 LocalDate dueDate = task.getRepetition().addInterval(firstDueDate, interval, i);
-                this.taskList.add(new Task(description, dueDate, Status.OPEN));
+                this.taskList.add(new Task(description, dueDate, task.getStatus()));
             }
         }
     }

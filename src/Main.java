@@ -22,6 +22,7 @@ public class Main {
 
         Repetition weekly5Repetition = new Repetition(LocalDate.of(2019, 3, 11), Interval.WEEK, 3);
         Task task2 = new Task(weekly5Repetition, "some repetitive task", Status.OPEN);
+
         Repetition weeklyEmptyTrash = new Repetition(LocalDate.of(2019,3,2), Interval.WEEK, 5);
         Task task4 = new Task(weeklyEmptyTrash, "Empty trash bin", Status.OPEN);
 
