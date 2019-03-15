@@ -43,9 +43,15 @@ public class TaskList {
     }
 
     // get a task by some property
-    public Task getTask() {
-        // TODO: fix this (just made up to be able to run!
-        Task task = new Task();
+    public Task getTask(String description, LocalDate dueDate, Status status) {
+        Task task = null;
+        for (Task t : this.taskList) {
+            if (t.getDescription().equals(description) && t.getDueDate().equals(dueDate) &&
+                    t.getStatus().equals(status)) {
+                task = t;
+                break;
+            }
+        }
         return task;
     }
 
@@ -102,7 +108,7 @@ public class TaskList {
     // TODO: add List<Property> as parameter, then make a stream of Comparators 'thenComparing()'
     // will sort by description (String), by dueDate (ascending) and status (ordinal)
     public void sortByProperty(Property property) {
-        Comparator comparator = property.equals(Property.DESCRIPTION) ? Comparator.comparing(Task::getDescriptionToLowerCase) : property.equals(Property.DUE_DATE) ? Comparator.comparing(Task::getDueDate) : Comparator.comparing(Task::getStatus);
+        Comparator comparator = property.equals(Property.DESCRIPTION) ? Comparator.comparing(Task::getDescriptionToLowerCase) : property.equals(Property.DUE_DATE) ? Comparator.comparing(Task::getDueDate) : property.equals(Property.STATUS) ? Comparator.comparing(Task::getStatus) : property.equals(Property.ID) ? Comparator.comparing(Task::getId) : null;
         this.taskList.sort(comparator);
     }
 }

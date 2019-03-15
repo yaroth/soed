@@ -10,8 +10,9 @@ public class Task {
     /*might use this as an ID*/
     private static int count = 0;
 
-    private int id = 0;
 
+
+    private int id = 0;
     private String description = "";
     private LocalDate dueDate = LocalDate.now(); // default is now()!
     private Status status = Status.OPEN;
@@ -80,6 +81,9 @@ public class Task {
         return repetition;
     }
 
+    public int getId() {
+        return id;
+    }
 
     @Override
     public String toString() {
