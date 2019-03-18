@@ -89,4 +89,14 @@ public class Task {
     public String toString() {
         return description + ", " + status + ", " + dueDate + "(ID: " + id +")";
     }
+
+    public String byStatus() {
+        return status + ", " + description + ", " + dueDate + "(ID: " + id +")";
+    }
+    public String byDueDate() {
+        return dueDate + ", " + description + ", " + status + "(ID: " + id +")";
+    }
+    public String byID() {
+        return id + ", " + dueDate + ", " + description + ", " + status;
+    }
 }

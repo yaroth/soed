@@ -17,6 +17,8 @@ import java.util.*;
 
 public class TaskList {
 
+
+
     private List<Task> taskList = new ArrayList<>();
 
     private TextTaskListDao textFileWriter = new TextTaskListDao(new File("TaskList"));
@@ -69,7 +71,24 @@ public class TaskList {
     @Override
     public String toString() {
         String taskListString = "";
-        for (Task t : this.taskList) taskListString += t + "\n";
+        for (Task task : this.taskList) taskListString += task + "\n";
+        return taskListString;
+    }
+
+    public String byStatus(){
+        String taskListString = "";
+        for (Task task : this.taskList) taskListString += task.byStatus() + "\n";
+        return taskListString;
+    }
+
+    public String byDueDate(){
+        String taskListString = "";
+        for (Task task : this.taskList) taskListString += task.byDueDate() + "\n";
+        return taskListString;
+    }
+    public String byID(){
+        String taskListString = "";
+        for (Task task : this.taskList) taskListString += task.byID() + "\n";
         return taskListString;
     }
 
@@ -106,9 +125,24 @@ public class TaskList {
     }
 
     // TODO: add List<Property> as parameter, then make a stream of Comparators 'thenComparing()'
-    // will sort by description (String), by dueDate (ascending) and status (ordinal)
-    public void sortByProperty(Property property) {
-        Comparator comparator = property.equals(Property.DESCRIPTION) ? Comparator.comparing(Task::getDescriptionToLowerCase) : property.equals(Property.DUE_DATE) ? Comparator.comparing(Task::getDueDate) : property.equals(Property.STATUS) ? Comparator.comparing(Task::getStatus) : property.equals(Property.ID) ? Comparator.comparing(Task::getId) : null;
-        this.taskList.sort(comparator);
+    // will sort by description (String), by dueDate (ascending), by status (ordinal) or by ID (ascending)
+    public void sortByPropertyList(ArrayList<Property> propertyList) {
+        if (propertyList != null) {
+            Comparator comparator =
+                    propertyList.get(0).equals(Property.DESCRIPTION) ? Comparator.comparing(Task::getDescriptionToLowerCase) :
+                            propertyList.get(0).equals(Property.DUE_DATE) ? Comparator.comparing(Task::getDueDate) :
+                                    propertyList.get(0).equals(Property.STATUS) ? Comparator.comparing(Task::getStatus) :
+                                            propertyList.get(0).equals(Property.ID) ? Comparator.comparing(Task::getId) : null;
+            for (int i=1 ; i<propertyList.size() ; i++){
+                Comparator comparator1 =
+                        propertyList.get(i).equals(Property.DESCRIPTION) ? Comparator.comparing(Task::getDescriptionToLowerCase) :
+                                propertyList.get(i).equals(Property.DUE_DATE) ? Comparator.comparing(Task::getDueDate) :
+                                        propertyList.get(i).equals(Property.STATUS) ? Comparator.comparing(Task::getStatus) :
+                                                propertyList.get(i).equals(Property.ID) ? Comparator.comparing(Task::getId) : null;
+
+                comparator = comparator.thenComparing(comparator1);
+            }
+            this.taskList.sort(comparator);
+        }
     }
 }
